@@ -14,7 +14,7 @@ app.use(express.json())
 
 
 app.get('/contacts',(req,res) => {
-        data.start();
+        
         res.json(data.contacts)
     
 })
@@ -57,4 +57,5 @@ app.delete('/contacts/:id',(req,res) => {
 
 app.listen(3000, () => {
     console.log("go")
+    data.start();
 })

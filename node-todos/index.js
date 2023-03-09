@@ -24,8 +24,8 @@ app.get('/todolist/:id',(req,res)=>{
 })
 
 app.put('/todolist/:id',(req,res)=> {
-    const {title,container} =req.body
-    if(todoList.editTodo(req.params.id,title,container)){
+    const {title,content} =req.body
+    if(todoList.editTodo(req.params.id,title,content)){
         res.json({message : "todo modifié"})
     }else{
         res.json({message:"erreur modification"})
@@ -40,9 +40,17 @@ app.put('/todolist/:id/status',(req,res)=> {
     }
 })
 
+app.get('/search',(req,res)=> {
+    if(todoList.findTodo(req.body)){
+        res.json({message : "todo  trouvé"})
+    }else{
+        res.json({message:"todo introuvable"})
+    }
+})
+
 app.post('/todolist',(req,res)=>{
-    const {title,container,status} =req.body
-    todoList.addTodo(title,container,status)
+    const {title,content,status} =req.body
+    todoList.addTodo(title,content,status)
     res.json({message :"todo ajoutée"})
 
 })

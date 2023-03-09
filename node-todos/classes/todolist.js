@@ -8,8 +8,8 @@ export class Todolist {
 
     }
 
-    addTodo(title,container){
-        const todo = new Todo(++this.compteur, title,container,this.status)
+    addTodo(title,content){
+        const todo = new Todo(++this.compteur, title,content,this.status)
         this.todoLists.push(todo)
     }
 
@@ -17,11 +17,11 @@ export class Todolist {
         return this.todoLists.find(t=> t.id == id)
     }
 
-    editTodo(id,title,container){
+    editTodo(id,title,content){
         const todo = this.retreiveTodo(id)
         if(todo != undefined){
             todo.title=title
-            todo.container=container
+            todo.content=content
             return true
         }
         return false
@@ -36,7 +36,6 @@ export class Todolist {
         return false
     }
 
-
     deleteTodo(id){
         const todo = this.retreiveTodo(id)
         if(todo != undefined){
@@ -45,4 +44,13 @@ export class Todolist {
         }
         return false
     }
+
+    findTodo(search){
+
+        return this.todoLists.find(todo => {
+            return todo.title === search
+        })
+    }
+
+
 }

@@ -41,12 +41,16 @@ export class Data {
     }
 
     start(){
+        this.contacts = []
         const lineReader = new LineByLine("data.csv")
         let line
         while(line = lineReader.next()){
             const donnees = line.toString().split(';')
             const contact = {id : +donnees[0] ,nom : donnees[1], prenom : donnees[2],telephone : donnees[3], email : donnees[4]}
             this.contacts.push(contact)
+        }
+        if(this.contacts.length != 0){
+            this.compteur = this.contacts[this.contacts.length-1].id
         }
 
     }
