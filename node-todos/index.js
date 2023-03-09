@@ -3,7 +3,7 @@ import express from "express"
 import { Todolist } from "./classes/todolist.js"
 
 
-const todoList = new Todolist
+const todoList = new Todolist()
 
 const app = express()
 
@@ -40,17 +40,13 @@ app.put('/todolist/:id/status',(req,res)=> {
     }
 })
 
-app.get('/search',(req,res)=> {
-    if(todoList.findTodo(req.body)){
-        res.json({message : "todo  trouvé"})
-    }else{
-        res.json({message:"todo introuvable"})
-    }
+app.get('/todolist/search/:search',(req,res)=> {
+    res.json(todoList.findTodo(req.params.search))
 })
 
 app.post('/todolist',(req,res)=>{
-    const {title,content,status} =req.body
-    todoList.addTodo(title,content,status)
+    const {title,content} =req.body
+    todoList.addTodo(title,content)
     res.json({message :"todo ajoutée"})
 
 })
