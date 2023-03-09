@@ -1,6 +1,7 @@
 
 import express from "express"
 import { Todolist } from "./classes/todolist.js"
+import {writeFileSync , readFileSync} from "fs"
 
 
 const todoList = new Todolist()
@@ -11,7 +12,9 @@ app.use(express.json())
 
 app.get('/todolist',(req,res)=>{
 
-    res.json(todoList.todoLists)
+    const contenu = readFileSync("data.json").toString()
+
+    res.json(JSON.parse(contenu))
 })
 
 app.get('/todolist/:id',(req,res)=>{
